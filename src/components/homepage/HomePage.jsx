@@ -67,18 +67,23 @@ export default function HomePage()
         }
         
     } */
-    
-    const [meBattery, setMeBattery] = useState(100);
+
+    // storedMeBattery &&= "new value"; only if storedMeBattery is truthy
+    // (?? not ||) so if it's (0 or "") wouldnt give null 
+    let storedMeBattery = sessionStorage.getItem("meBatteryLog") ?? 100;
+
+    // const [meBattery, setMeBattery] = useState(100);
+    const [meBattery, setMeBattery] = useState(storedMeBattery);
     const [batteryState, setBatteryState] = useState("PERFECT");
     
     
     useEffect(() =>
     {
         $("#batteryEle").css("width", `${meBattery}%`);
-        // sessionStorage.setItem("meBatteryLog", meBattery);
+        sessionStorage.setItem("meBatteryLog", meBattery);
         console.log($("#meBattery").val())
         console.log(meBattery)
-        sessionStorage.setItem("meBatteryLog", $("#meBattery").val());
+        sessionStorage.setItem("meBatteryValLog", $("#meBattery").val());
         // setBatteryState
         // 40 < meBattery && meBattery < 50 ? setBatteryState("GreenZone") : (console.log("False"), setBatteryState("RedZone"));
 // setBatteryState("RedZone")
