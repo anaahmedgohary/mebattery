@@ -7,86 +7,41 @@ import "./style/homepage.css";
 
 // JS
 import $ from "jquery";
+import { json } from 'react-router-dom';
 
 export default function HomePage()
 {
     
-    // AOS.init(2000);
-
-
-   // const littleExpend = useRef(0);
-
     const [littleExpend, setLittleExpend] = useState(0);
     const [mildExpend, setMildExpend] = useState(0);
     const [deepExpend, setDeepExpend] = useState(0);
-
-    
-
    
-    /* function updateExpends(event)
-    {
-        if (event.target.id === "addlittleExpend" && meBattery >= 5)
-        {
-            // littleExpend.current = littleExpend.current + 1;
-            // console.log(littleExpend.current);
-            setLittleExpend(littleExpend + 1);
-            setMeBattery(meBattery - 5);
-            // 
-
-        }
-        else if (event.target.id === "addOnePoint" && meBattery >= 1)
-        {
-            setMeBattery(meBattery - 1);
-        }
-        else if (event.target.id === "addmildExpend" && meBattery >= 20)
-        {
-            setMildExpend(mildExpend + 1);
-            setMeBattery(meBattery - 20);
-            // 
-
-        } else if (event.target.id === "addDeepExpend" && meBattery >= 40)
-        {
-            setDeepExpend(deepExpend + 1);
-            setMeBattery(meBattery - 40);
-            // 
-        } else if (event.target.id === "addjustExpend" && meBattery >= 10) {
-            setMeBattery(meBattery - 10);
-        }
-        else if (event.target.id === "addReallyDeep" && meBattery >= 50)
-        {
-            setMeBattery(meBattery - 50);
-        }
-        else if (event.target.id === "addDayEnder" && meBattery >= 100)
-        {
-            setMeBattery(meBattery - 100);
-        }
-            
-        else
-        {
-            alert(`Notice: \nBattery is at ${meBattery}% !!! \nYou need to recharge first`)
-        }
-        
-    } */
-
     // storedMeBattery &&= "new value"; only if storedMeBattery is truthy
     // (?? not ||) so if it's (0 or "") wouldnt give null 
-    let storedMeBattery = sessionStorage.getItem("meBatteryLog") ?? 100;
+    
+    let storedMeBattery = JSON.parse(sessionStorage.getItem("meBatteryLog")) ?? 100;
 
     // const [meBattery, setMeBattery] = useState(100);
     const [meBattery, setMeBattery] = useState(storedMeBattery);
-    const [batteryState, setBatteryState] = useState("PERFECT");
+   // setMeBattery(storedMeBattery);
+    const [batteryState, setBatteryState] = useState("PERFECTion");
+
+    // useEffect(() =>
+    // {
+    //     setMeBattery(storedMeBattery);
+    // },[])
     
     
     useEffect(() =>
     {
         $("#batteryEle").css("width", `${meBattery}%`);
-        sessionStorage.setItem("meBatteryLog", meBattery);
-        console.log($("#meBattery").val())
+        sessionStorage.setItem("meBatteryLog", JSON.stringify(meBattery));
+        // console.log($("#meBattery").val())
         console.log(meBattery)
-        sessionStorage.setItem("meBatteryValLog", $("#meBattery").val());
+        // sessionStorage.setItem("meBatteryValLog", JSON.stringify($("#meBattery").val()));
         // setBatteryState
         // 40 < meBattery && meBattery < 50 ? setBatteryState("GreenZone") : (console.log("False"), setBatteryState("RedZone"));
-// setBatteryState("RedZone")
+        // setBatteryState("RedZone")
         meBattery >= 50 ? (setBatteryState("GreenZone"), console.log("GreenZone")) : meBattery < 50 ? (setBatteryState("RedZone"), console.log("RedZone")) : console.log("falso");
 
         meBattery <= 0 ? ($(".drainBtn").attr("disabled", true), setMeBattery(0)) : $(".drainBtn").attr("disabled", false);
@@ -94,75 +49,24 @@ export default function HomePage()
 
     }, [meBattery])
 
-    // useEffect(
-    //     () =>
-    //     {
-    //         if (meBattery >= 100)
-    //         {
-    //             setBatteryState("PERFECT");
-    //         }
-    //         else if (meBattery < 100 && meBattery >= 75)
-    //         {
-    //             setBatteryState("Great");
-    //         }
-    //         else if (meBattery < 75 && meBattery >= 60)
-    //         {
-    //             setBatteryState("Good");
-    //         } else if (meBattery < 60 && meBattery >= 50)
-    //         {
-    //             setBatteryState("OK");
-    //         }
-    //         else if (meBattery < 50 && meBattery >= 40)
-    //         {
-    //             setBatteryState("less than 50%");
-    //         }
-    //         else if (meBattery < 40 && meBattery >= 30)
-    //         {
-    //             setBatteryState("Not Too Bad");
-    //         }
-    //         else if (meBattery < 30 && meBattery >= 20)
-    //         {
-    //             setBatteryState("Shaky");
-    //         } else if (meBattery < 20 && meBattery > 0)
-    //         {
-    //             setBatteryState("Fragile");
-    //         }
-    //         else if (meBattery === 0)
-    //         {
-    //             setBatteryState("Zero");
-    //         } else
-    //         {
-    //             $("#batteryEle").css("width", `${meBattery}%`);
-    //            // sessionStorage.setItem("batteryState", batteryState);
-    //             sessionStorage.setItem("batteryLevel", meBattery);
-    //         }
-
-    //         $("#batteryEle").css("width", `${meBattery}%`);
-    //         console.log(batteryState);
-    //         // sessionStorage.setItem("batteryState", batteryState);
-    //         sessionStorage.setItem("batteryLevel", meBattery);
-    //     },
-    //     // [meBattery]
-    // );
-
-    // fix 1 step latency
     
     const [sessHandel, setSessHandel] = useState();
 
     useEffect(() =>
     {
-        let sessel = sessionStorage.getItem("meBatteryLog");
+        
+        let sessel = JSON.parse(sessionStorage.getItem("meBatteryLog"));
         setSessHandel(sessel);
     });
     // fixes 1 step latency
 
    
     
-    // useEffect(() =>
-    // {
-        // $("#cscontanor").css("display","flex");
+    useEffect(() =>
+    {
+        $("#cscontanor").css("display","none");
 
-    // }, [])
+    }, [])
     
 
     
@@ -180,13 +84,15 @@ export default function HomePage()
         <div className='ssfds d-flex justify-content-around align-items-center'>
 
             <button className='btn btn-primary col-3'
-                onClick={() =>
+                onClick={(e) =>
                 {
                     // $("#ExpendtsCatalog").toggleClass("d-flex");
                     $("#cscontanor").slideToggle(1000);
+                    // $(e.target).text("Hide")
+                    $(e.target).text($(e.target).text() == "Show Controls" ? "Hide Controls" : "Show Controls")
                 }}
             >
-                Add Expends
+                Show Controls 
             </button>
 
             <button className='btn btn-success col-3'
@@ -304,7 +210,8 @@ export default function HomePage()
                         id='addReallyDeep'
                         onClick={() =>
                         {
-                           meBattery < 50 ? console.log("not enough") : setMeBattery(meBattery - 50);
+                            // meBattery < 50 ? console.log("not enough") :
+                            setMeBattery(meBattery - 50);
                         }}
                         className="drainBtn btn btn-info">Drain (-50)
                     </button>
@@ -367,7 +274,7 @@ export default function HomePage()
 
         </div>
         <div className='text-center'>
-            <div className='d-flex'>
+            <div className='d-none'>
                 <input
                     type="range"
                     min={0} max={100}
@@ -378,7 +285,6 @@ export default function HomePage()
                     required
                     onChange={() =>
                     {
-
                         console.log($("#meBattery").val())
                     }}
                 />
@@ -390,20 +296,19 @@ export default function HomePage()
             </div>
 
             <div className='position-absolute top-50 start-50 translate-middle'>
-                {/* <h1>{meBattery} %</h1> */}
-                <h1>{$("#meBattery").val()} %</h1>
+                <h1>{meBattery} %</h1>
             </div>
         </div>
+
         <div>
             <h2>Energy Level is: {batteryState}</h2>
         </div>
 
 
        
-        <div>
-            
+        {/* <div>
             <h1>{sessHandel}</h1>
-        </div>
+        </div> */}
 
 
 
