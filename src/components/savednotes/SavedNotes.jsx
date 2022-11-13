@@ -6,6 +6,7 @@ export default function SavedNotes()
     
     //const localURL = "http://localhost:8080";
     const netlifyURL = "https://backend123.netlify.app/.netlify/functions/api"
+   // https://backend123.netlify.app/.netlify/functions/api/savednotes
     //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
     useEffect(() =>
     {
