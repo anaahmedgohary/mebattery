@@ -82,7 +82,7 @@ export default function HomePage()
         setLevel(meBattery);
 
         axios
-            .post(`${baseURL}/commentlevel`, { comment: comment, level: level })
+            .post(`${baseURL}/commentlevel`, { comment: `${comment}`, level: `${level}` })
             .then((response) =>
             {
                 setSavedComm(response.data)
