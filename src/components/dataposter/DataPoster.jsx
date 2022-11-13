@@ -5,7 +5,8 @@ export default function DataPoster() {
       <div>
           
 
-          <form onSubmit={handelsubmit}>
+      <form onSubmit={handelsubmit}>
+        <label htmlFor="sdf">aaaaaaaaaaa</label>
               <input type="text" name="posttitle" id="" />
               <input type="text" name="imageurl" id="" />
               <input type="text" name="eventdate" id="" />
