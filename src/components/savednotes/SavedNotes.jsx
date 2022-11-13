@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
 import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+
 
 export default function SavedNotes()
 {
@@ -22,7 +23,7 @@ export default function SavedNotes()
 
     useEffect(() =>
     {
-        axios.get(`${netlifyURL}/savednotes`).then((response) =>
+        axios.get(`${netlifyURL}/savednotes/`).then((response) =>
             {
                 // setSavedNote(response.data);
                 setSavedNote(response.data);
