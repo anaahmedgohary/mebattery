@@ -1,4 +1,5 @@
-import React, {useState, useEffect, useRef} from 'react'
+import React, { useState, useEffect, useRef } from 'react'
+import axios from 'axios';
 
 // CSS
 import "./style/homepage.css";
@@ -49,9 +50,8 @@ export default function HomePage()
 
     }, [meBattery])
 
-    
+    // what is this???
     const [sessHandel, setSessHandel] = useState();
-
     useEffect(() =>
     {
         
@@ -64,10 +64,31 @@ export default function HomePage()
     
     useEffect(() =>
     {
-        $("#cscontanor").css("display","none");
+        $("#cscontanor").css("display", "none");
 
-    }, [])
-    
+    }, []);
+
+
+    // for posting comments
+    const baseURL = "https://backend-mebattery.vercel.app/mebattery";
+    const [comment, setComment] = useState();
+    const [level, setLevel] = useState();
+
+    const [savedComm, setSavedComm] = useState();
+
+    function submitHandler(e)
+    {
+        e.preventDefault();
+        setLevel(meBattery);
+
+        axios
+            .post(`${baseURL}/commentlevel`, { comment: comment, level: level })
+            .then((response) =>
+            {
+                setSavedComm(response.data)
+            })
+
+    }
 
     
     
@@ -79,6 +100,15 @@ export default function HomePage()
             <h2 className='text-center'>Welcome To</h2>
             <h2 className='text-center'>Your Brand New</h2>
             <h1 className='text-center border border-dark border-4'>Brand New Day</h1>
+        </div>
+        <div>
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/savednotes" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Saved Notes</a>
+                    </li>
+                </ul>
+            </nav>
         </div>
 
         <div className='ssfds d-flex justify-content-around align-items-center'>
@@ -106,9 +136,9 @@ export default function HomePage()
         </div>
 
         <div className='catcont' id='cscontanor'>
-            <div id='ExpendtsCatalog' className='row row-cols-auto text-center m-auto d-flex justify-content-center'>
+            <div id='ExpendtsCatalog' className='row row-cols-auto  text-center d-flex gap-4 justify-content-center py-4'>
                 
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p>(1 Unit)</p>
                     <button id='addOnePoint'
                         onClick={() =>
@@ -127,7 +157,7 @@ export default function HomePage()
                     </button>
                 </div>
 
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p> (5 Units)</p>
                     <button id='addlittleExpend'
                         onClick={() =>
@@ -146,7 +176,7 @@ export default function HomePage()
                     </button>
                 </div>
 
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p>(10 Units)</p>
                     <button id='addjustExpend'
                         onClick={() =>
@@ -165,7 +195,7 @@ export default function HomePage()
                     </button>
                 </div>
             
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p>(20 Units)</p>
                     <button id='addmildExpend'
                         onClick={() =>
@@ -184,7 +214,7 @@ export default function HomePage()
                     </button>
                 </div>
             
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p>(40 Units)</p>
                     <button
                         id='addDeepExpend'
@@ -204,7 +234,7 @@ export default function HomePage()
                     </button>
                 </div>
 
-                <div className='border border-dark col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
+                <div className='col-lg-3 col-md-5 col-sm-6 col-12 text-center'>
                     <p>(50 Units)</p>
                     <button
                         id='addReallyDeep'
@@ -234,9 +264,30 @@ export default function HomePage()
 
             <div className='ExpendsRecord row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 justify-content-center'>
 
-                <div className='LittelExpendsDiv text-center border border-dark d-grid justify-content-center align-items-center'>
+                <div className='LittelExpendsDiv text-center d-grid justify-content-center align-items-center'>
                     <div className='Expends-cat'>
                         <p className='m-0'>Little Drainage</p>
+                    </div>
+                    <div className='save-comment-div'>
+                        <form id='commentForm' onSubmit={submitHandler}>
+                            <div>
+                                <label htmlFor="comment">your note</label>
+                                <input type="text" name='comment' id='comment' onChange={(e) => { setComment(e.target.value) }} />
+                            </div>
+                            
+                           <div>
+                             <label htmlFor="level">battery %</label>
+                             {/* value={meBattery} OROR onChange={(e) => { setLevel(e.target.value) }} */}
+                                <input type="text" value={meBattery} readOnly name='level' id='level' className='text-center bg-gradient bg-info' />
+                           </div>
+
+                            <input type="submit" value="Save Comment" id='saveCom' className='btn btn-success' />
+                        </form>
+                    </div>
+                    <div className='results-div'>
+                        <div><p>{comment}</p>
+                            <p>{ level}</p></div>
+                        <p className='border border-5 border-danger'>{savedComm}</p>
                     </div>
                     <div className='Expends-input-div'>
                         <h3>{littleExpend} Times Today</h3>
@@ -246,7 +297,7 @@ export default function HomePage()
                     </div>
                 </div>
 
-                <div className='mildExpendsDiv border border-dark text-center'>
+                <div className='mildExpendsDiv text-center'>
                     <div className='Expends-cat'>
                         <p className='m-0'>Mild Drainage (-10)</p>
                     </div>
@@ -258,7 +309,7 @@ export default function HomePage()
                     </div>
                 </div>
 
-                <div className='DeepExpendsDiv border border-dark text-center'>
+                <div className='DeepExpendsDiv text-center'>
                     <div className='Expends-cat'>
                         <p className='m-0'>Critical Drainage (-40)</p>
                     </div>

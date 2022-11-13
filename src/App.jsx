@@ -6,7 +6,9 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/AppStyle/App.css"
 
+// routes elements
 import HomePage from './components/homepage/HomePage';
+import SavedNotes from "./components/savednotes/SavedNotes";
 
 //aos animate on scroll
 import AOS from 'aos';
@@ -45,6 +47,7 @@ function App()
     <Router>
       <Routes>
         <Route path='/' element={<HomePage />} />
+        <Route path='/savednotes' element={<SavedNotes />} />
       </Routes>
     </Router>
   )
