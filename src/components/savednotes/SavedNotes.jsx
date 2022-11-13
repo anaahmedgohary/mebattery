@@ -25,7 +25,7 @@ export default function SavedNotes()
         axios.get(`${netlifyURL}/savednotes`).then((response) =>
         {
             // setSavedNote(response.data);
-            setSavedNote(response.data);
+            setSavedNote(response.body);
             // console.log(response.data);
         });
             // .catch((error) =>
