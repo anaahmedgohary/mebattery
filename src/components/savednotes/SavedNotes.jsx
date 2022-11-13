@@ -1,6 +1,8 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+import NotesMapper from './NotesMapper';
+
 
 export default function SavedNotes()
 {
@@ -19,20 +21,30 @@ export default function SavedNotes()
     // }, []);
 
     const [savedNote, setSavedNote] = useState(null);
+    const [notesArray, setNotesArray] = useState(null)
 
     useEffect(() =>
     {
-        axios.get(`${netlifyURL}/savednotes`).then((response) =>
-        {
+        axios
+            .get(`${netlifyURL}/savednotes/`)
+            .then((response) =>
+            {
             // setSavedNote(response.data);
-            setSavedNote(response.body);
-            // console.log(response.data);
-        });
-            // .catch((error) =>
-            // {
-            //     console.error(`"unsuccess damn the kids" + ${error}`);
-            // })
+            //setSavedNote(response.data);
+           // console.log(response.data[1].comment);
+            //setSavedNote(response.data[0].comment);
+           // setSavedNote([response.data]);
+            setSavedNote(response.data);
+            
+        })
+       
     }, []);
+
+    useEffect(() =>
+    {
+        console.log(savedNote);
+        setNotesArray(savedNote);
+    }, [savedNote])
 
     
 
@@ -44,16 +56,21 @@ export default function SavedNotes()
             <h1>Here are your notes</h1>
         </div>
 
+        
+
         <div>
             {
-                savedNote.map((item, index) =>
+                notesArray.map((item, index) =>
                 {
                     return (
-                        <div key={index}>
-                            <p>date: {item.date}</p>
-                            <p>Note: {item.comment}</p>
-                            <p>Battery level: {item.level}</p>
-                        </div>
+
+                        <NotesMapper
+                            index={index}
+                            date={item.date}
+                            comment={item.comment}
+                            level={item.level}
+                        />
+                        
                     )
                 })
             }
