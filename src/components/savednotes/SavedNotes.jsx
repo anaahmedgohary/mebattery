@@ -23,7 +23,7 @@ export default function SavedNotes()
 
     useEffect(() =>
     {
-        axios.get(`${netlifyURL}/savednotes/`).then((response) =>
+        axios.get(`${netlifyURL}/savednotes`).then((response) =>
             {
                 // setSavedNote(response.data);
                 setSavedNote(response.data);

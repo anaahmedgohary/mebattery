@@ -106,8 +106,12 @@ export default function HomePage()
         <div>
             <nav>
                 <ul>
+                    
                     <li>
                         <a href="/savednotes" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Saved Notes</a>
+                    </li>
+                    <li>
+                        <a href="/dataposter" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Data poster</a>
                     </li>
                 </ul>
             </nav>
