@@ -1,6 +1,15 @@
+import axios from 'axios';
 import React from 'react'
 
-export default function DataPoster() {
+export default function DataPoster()
+{
+  
+  function handelsubmit(e)
+  {
+    e.preventDefault();
+    console.log("form submitted")
+  }
+
   return (
       <div>
           
