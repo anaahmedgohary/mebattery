@@ -3,7 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-  "proxy": "https://backend123.netlify.app",
+  "proxy": "https://backend-mebattery.vercel.app/mebattery/",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

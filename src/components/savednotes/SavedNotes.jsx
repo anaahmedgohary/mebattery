@@ -9,8 +9,7 @@ export default function SavedNotes()
 {
     
     //const localURL = "http://localhost:8080";
-    const netlifyURL = "https://backend123.netlify.app/.netlify/functions/api";
-    const baseURL =  "https://backend123.netlify.app/.netlify/functions/api/savednotes"
+    const baseURL =  "https://backend-mebattery.vercel.app/mebattery/savednotes"
     //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
 
     // React.useEffect(() =>
@@ -29,16 +28,16 @@ export default function SavedNotes()
         axios
             .get(baseURL)
             .then((response) =>
-            {
-            setSavedNote(response.data);
-            
-        })
+                {
+                    setSavedNote(response.data);
+                }
+            )
        
     }, []); 
 
 // is possible that thats it 
 // it actually it is    
-    if (!savedNote) return null;
+    if (!savedNote) return <div>Please Reload! (2 or 3 times)</div>;
 
     return (<div>
 
