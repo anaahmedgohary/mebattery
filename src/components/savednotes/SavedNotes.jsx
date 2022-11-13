@@ -8,26 +8,33 @@ export default function SavedNotes()
     const netlifyURL = "https://backend123.netlify.app/.netlify/functions/api"
    // https://backend123.netlify.app/.netlify/functions/api/savednotes
     //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
+
+    // React.useEffect(() =>
+    // {
+    //     axios.get(`${baseURL}/1`).then((response) =>
+    //     {
+    //         setPost(response.data);
+    //     });
+    // }, []);
+
+    const [savedNote, setSavedNote] = useState(null);
+
+
     useEffect(() =>
     {
-        axios
-            .get(`${netlifyURL}/savednotes`)
-            .then((response) =>
+        axios.get(`${netlifyURL}/savednotes`).then((response) =>
             {
                 // setSavedNote(response.data);
                 setSavedNote(response.data);
                 console.log(response.data);
             })
-            .catch((error) =>
-            {
-                console.error(`"unsuccess damn the kids" + ${error}`);
-            })
-        
-        
-        
+            // .catch((error) =>
+            // {
+            //     console.error(`"unsuccess damn the kids" + ${error}`);
+            // })
     }, []);
 
-    const [savedNote, setSavedNote] = useState([]);
+    
 
 
 
