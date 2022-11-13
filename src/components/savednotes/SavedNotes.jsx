@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
+// import $ from "jquery";
 import NotesMapper from './NotesMapper';
 
 
@@ -9,7 +10,7 @@ export default function SavedNotes()
     
     //const localURL = "http://localhost:8080";
     const netlifyURL = "https://backend123.netlify.app/.netlify/functions/api";
-   // https://backend123.netlify.app/.netlify/functions/api/savednotes
+    const baseURL =  "https://backend123.netlify.app/.netlify/functions/api/savednotes"
     //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
 
     // React.useEffect(() =>
@@ -20,35 +21,24 @@ export default function SavedNotes()
     //     });
     // }, []);
 
-    const [savedNote, setSavedNote] = useState(null);
-    const [notesArray, setNotesArray] = useState(null)
+    const [savedNote, setSavedNote] = useState("");
+    const [notesArray, setNotesArray] = useState([]);
 
     useEffect(() =>
     {
         axios
-            .get(`${netlifyURL}/savednotes/`)
+            .get(baseURL)
             .then((response) =>
             {
-            // setSavedNote(response.data);
-            //setSavedNote(response.data);
-           // console.log(response.data[1].comment);
-            //setSavedNote(response.data[0].comment);
-           // setSavedNote([response.data]);
             setSavedNote(response.data);
             
         })
        
-    }, []);
+    }, []); 
 
-    useEffect(() =>
-    {
-        console.log(savedNote);
-        setNotesArray(savedNote);
-    }, [savedNote])
-
-    
-
-
+// is possible that thats it 
+// it actually it is    
+    if (!savedNote) return null;
 
     return (<div>
 
@@ -56,19 +46,28 @@ export default function SavedNotes()
             <h1>Here are your notes</h1>
         </div>
 
-        
+        {/* <div className='text-center'>
+            <button className='btn btn-success'
+                onClick={
+                    showNotes
+                }
+            >
+                Show
+            </button>
+        </div> */}
 
         <div>
             {
-                notesArray.map((item, index) =>
+                savedNote.map((item, index) =>
                 {
                     return (
 
                         <NotesMapper
-                            index={index}
+                            key={index}
                             date={item.date}
                             comment={item.comment}
                             level={item.level}
+                            id={item.id}
                         />
                         
                     )
