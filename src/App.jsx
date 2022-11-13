@@ -1,7 +1,7 @@
 // import { useState } from 'react'
 // import reactLogo from './assets/react.svg'
 // import './App.css'
-//import React from 'react'
+import React from 'react'
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 // import 'bootstrap/dist/css/bootstrap.min.css';
 import "./assets/AppStyle/App.css"
