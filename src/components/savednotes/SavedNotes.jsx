@@ -5,11 +5,12 @@ export default function SavedNotes()
 {
     
     //const localURL = "http://localhost:8080";
-    const baseURL = "https://backend-mebattery.vercel.app/mebattery"
+    const netlifyURL = "https://backend123.netlify.app/.netlify/functions/api"
+    //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
     useEffect(() =>
     {
         axios
-            .get(`${baseURL}/savednotes`)
+            .get(`${netlifyURL}/savednotes`)
             .then((response) =>
             {
                 // setSavedNote(response.data);

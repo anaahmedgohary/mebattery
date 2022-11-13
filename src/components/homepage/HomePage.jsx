@@ -48,6 +48,8 @@ export default function HomePage()
         meBattery <= 0 ? ($(".drainBtn").attr("disabled", true), setMeBattery(0)) : $(".drainBtn").attr("disabled", false);
         meBattery >= 100 ? ($(".chargeBtn").attr("disabled", true), setMeBattery(100)) : $(".chargeBtn").attr("disabled", false);
 
+        setLevel(meBattery);
+
     }, [meBattery])
 
     // what is this???
@@ -79,7 +81,7 @@ export default function HomePage()
     function submitHandler(e)
     {
         e.preventDefault();
-        setLevel(meBattery);
+       // setLevel(meBattery);
 
         axios
             .post(`${baseURL}/commentlevel`, { comment: `${comment}`, level: `${level}` })
