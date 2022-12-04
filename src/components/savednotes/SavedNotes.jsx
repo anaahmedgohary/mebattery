@@ -9,7 +9,7 @@ export default function SavedNotes()
 {
     
     //const localURL = "http://localhost:8080";
-    const baseURL =  "https://backend-mebattery.vercel.app/mebattery/savednotes"
+    const baseURL = "https://backend-mebattery.vercel.app/mebattery/savednotes";
     //const baseURL = "https://backend-mebattery.vercel.app/mebattery"
 
     // React.useEffect(() =>

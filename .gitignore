@@ -13,6 +13,8 @@ dist-ssr
 *.local
 temp.txt
 netlify-method.jsx
+_redirects
+old_redirects
 
 # Editor directories and files
 .vscode/*
