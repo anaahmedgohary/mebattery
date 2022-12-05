@@ -103,8 +103,8 @@ export default function HomePage()
             <h4 className='text-center border border-dark border-4'>monitor your energy levels during your day with notes</h4>
         </div>
         <div>
-            <nav>
-                <ul>
+            <nav className='row row-cols-1 justify-content-center text-center'>
+                <ul className='row row-cols-1 list-unstyled'>
                     
                     <li>
                         <a href="/savednotes" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Saved Notes</a>
