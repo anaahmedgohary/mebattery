@@ -9,7 +9,7 @@ import "./assets/AppStyle/App.css"
 // routes elements
 import HomePage from './components/homepage/HomePage';
 import SavedNotes from "./components/savednotes/SavedNotes";
-import DataPoster from "./components/dataposter/DataPoster";
+// import DataPoster from "./components/dataposter/DataPoster";
 
 //aos animate on scroll
 import AOS from 'aos';
@@ -49,7 +49,7 @@ function App()
       <Routes>
         <Route path='/' element={<HomePage />} />
         <Route path='/savednotes' element={<SavedNotes />} />
-        <Route path="/dataposter" element={<DataPoster />} />
+        {/* <Route path="/dataposter" element={<DataPoster />} /> */}
       </Routes>
     </Router>
   )

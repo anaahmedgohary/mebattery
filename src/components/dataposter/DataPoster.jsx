@@ -12,7 +12,6 @@ export default function DataPoster()
 
   return (
       <div>
-          
 
       <form onSubmit={handelsubmit}>
         <label htmlFor="sdf">aaaaaaaaaaa</label>

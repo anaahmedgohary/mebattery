@@ -98,9 +98,9 @@ export default function HomePage()
     return (<div className='homepage'>
       
         <div className='container'>
-            <h2 className='text-center'>Welcome To</h2>
-            <h2 className='text-center'>Your Brand New</h2>
-            <h1 className='text-center border border-dark border-4'>Brand New Day</h1>
+            <h1 className='text-center'>Welcome To</h1>
+            <h2 className='text-center'>Your Brand New Day</h2>
+            <h4 className='text-center border border-dark border-4'>monitor your energy levels during your day with notes</h4>
         </div>
         <div>
             <nav>
@@ -109,9 +109,9 @@ export default function HomePage()
                     <li>
                         <a href="/savednotes" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Saved Notes</a>
                     </li>
-                    <li>
+                    {/* <li>
                         <a href="/dataposter" className='btn btn-dark' target="_blank" rel="noopener noreferrer">Data poster</a>
-                    </li>
+                    </li> */}
                 </ul>
             </nav>
         </div>
@@ -269,40 +269,40 @@ export default function HomePage()
 
             <div className='ExpendsRecord row row-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3 justify-content-center'>
 
-                <div className='LittelExpendsDiv text-center d-grid justify-content-center align-items-center'>
+                <div className='LittelExpendsDiv text-center d-grid justify-content-center align-items-center gy-4 py-4 border-4 border'>
+
                     <div className='Expends-cat'>
-                        <p className='m-0'>Little Drainage</p>
+                        <p className='h4 pb-4'>Save a note</p>
                     </div>
+
                     <div className='save-comment-div'>
-                        <form id='commentForm' onSubmit={submitHandler}>
-                            <div>
-                                <label htmlFor="comment">your note</label>
-                                <input type="text" name='comment' id='comment' onChange={(e) => { setComment(e.target.value) }} />
+
+                        <form id='commentForm' className='row gy-3' onSubmit={submitHandler}>
+
+                           <div>
+                                <label className='col-4' htmlFor="level">Battery Level</label>
+                             {/* value={meBattery} OROR onChange={(e) => { setLevel(e.target.value) }} */}
+                                <input type="text" value={meBattery} readOnly name='level' id='level' className='col-8 text-center bg-gradient bg-info' />
                             </div>
                             
-                           <div>
-                             <label htmlFor="level">battery %</label>
-                             {/* value={meBattery} OROR onChange={(e) => { setLevel(e.target.value) }} */}
-                                <input type="text" value={meBattery} readOnly name='level' id='level' className='text-center bg-gradient bg-info' />
-                           </div>
+                            <div>
+                                <label className='col-4' htmlFor="comment">Your note</label>
+                                <input className='col-8 text-center' type="text" name='comment' id='comment' onChange={(e) => { setComment(e.target.value) }} />
+                            </div>
 
-                            <input type="submit" value="Save Comment" id='saveCom' className='btn btn-success' />
+                            <input type="submit" value="Save Note" id='saveCom' className='btn btn-success' />
                         </form>
                     </div>
                     <div className='results-div'>
-                        <div><p>{comment}</p>
-                            <p>{ level}</p></div>
-                        <p className='border border-5 border-danger'>{savedComm}</p>
-                    </div>
-                    <div className='Expends-input-div'>
-                        <h3>{littleExpend} Times Today</h3>
-                    </div>
-                    <div className='petdegree'>
-                        <p>Good Shape</p>
+                        {/* <div>
+                            <p>{comment}</p>
+                            <p>{level}</p>
+                        </div> */}
+                        <p className='border border-1 border-danger h5'>{savedComm}</p>
                     </div>
                 </div>
 
-                <div className='mildExpendsDiv text-center'>
+                {/* <div className='mildExpendsDiv text-center'>
                     <div className='Expends-cat'>
                         <p className='m-0'>Mild Drainage (-10)</p>
                     </div>
@@ -312,9 +312,8 @@ export default function HomePage()
                     <div className='petdegree'>
                         <p>Common expenditure of daily life</p>
                     </div>
-                </div>
-
-                <div className='DeepExpendsDiv text-center'>
+                </div> */}
+                {/* <div className='DeepExpendsDiv text-center'>
                     <div className='Expends-cat'>
                         <p className='m-0'>Critical Drainage (-40)</p>
                     </div>
@@ -325,7 +324,7 @@ export default function HomePage()
                     <div className='petdegree'>
                         <p>Can't take more than two of these.</p>
                     </div>
-                </div>
+                </div> */}
             </div>
 
         </div>
@@ -356,8 +355,8 @@ export default function HomePage()
             </div>
         </div>
 
-        <div>
-            <h2>Energy Level is: {batteryState}</h2>
+        <div className='my-4'>
+            <h2 className='text-center'>Energy is at: {batteryState}</h2>
         </div>
 
 
